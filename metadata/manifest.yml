@@ -1,0 +1,28 @@
+---
+Name: maintenance_page
+Cartridge-Short-Name: MAINTENANCE_PAGE
+Architecture: x86_64
+Display-Name: Maintenance Page 1.0
+Description: Maintenance page during your app deploys
+Version: '1.0'
+Versions:
+- '1.0'
+Cartridge-Version: 0.0.1
+Cartridge-Vendor: startapp
+License: GPL
+Vendor: www.startapp.bg
+Categories:
+- service
+- embedded
+Website: http://www.startapp.bg
+Provides:
+- maintenance_page
+Scaling:
+  Min: 1
+  Max: -1
+Group-Overrides:
+- components:
+  - maintenance_page-1.0
+  - web_framework
+
+Source-Url: https://github.com/mignev/openshift-cartridge-maintenance-page.git

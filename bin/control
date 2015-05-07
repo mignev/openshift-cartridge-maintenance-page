@@ -1,0 +1,60 @@
+#!/bin/bash
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+MAINTENANCE_PID_FILE=${OPENSHIFT_MAINTENANCE_PAGE_DIR}/run/maintenance.pid
+OPENSHIFT_MPSRC=${OPENSHIFT_DATA_DIR}.maintenance_page_rc
+
+function start() {
+ client_result "Stop Maintenance Page!"
+
+ if [ -f $MAINTENANCE_PID_FILE ]; then
+   MAINTENANCE_PID=$(cat $MAINTENANCE_PID_FILE)
+   if [ -n "$MAINTENANCE_PID" ]; then
+       kill -9 $MAINTENANCE_PID  2>/dev/null
+       rm -rf $MAINTENANCE_PID_FILE;
+   else
+       echo "There isn't maintenance web server."
+   fi
+ fi
+}
+
+function stop() {
+  client_result "Starting Maintenance Page!"
+
+  if [ ! -f $MAINTENANCE_PID_FILE ]; then
+
+    if [ -z "$MAINTENANCE_PID" ]; then
+      nohup python ${OPENSHIFT_MAINTENANCE_PAGE_DIR}/lib/maintenance.py > ${OPENSHIFT_MAINTENANCE_PAGE_DIR}/logs/maintenance_page.log 2>&1&
+      echo $! > $MAINTENANCE_PID_FILE
+    fi
+  fi
+
+}
+
+function restart() {
+    stop
+    start
+}
+
+function status() {
+  return 0
+}
+
+function reload() {
+  :
+}
+
+function tidy() {
+  echo "Nothing to clean."
+}
+
+case "$1" in
+  start) start ;;
+  stop) stop ;;
+  restart) restart ;;
+  status) status ;;
+  reload) reload ;;
+  tidy) tidy ;;
+  *) exit 0
+esac
