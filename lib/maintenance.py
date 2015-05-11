@@ -10,14 +10,16 @@ import urllib
 
 CUSTOM_PAGE = os.getenv("MAINTENANCE_URL", None)
 
-HOST_NAME = os.getenv("OPENSHIFT_RUBY_IP") \
+HOST_NAME = os.getenv("OPENSHIFT_HAPROXY_IP") \
+            or os.getenv("OPENSHIFT_RUBY_IP") \
             or os.getenv("OPENSHIFT_PHP_IP") \
             or os.getenv("OPENSHIFT_NODEJS_IP") \
             or os.getenv("OPENSHIFT_PYTHON_IP") \
             or os.getenv("OPENSHIFT_PERL_IP") \
             or os.getenv("OPENSHIFT_DIY_IP")
 
-PORT_NUMBER = os.getenv("OPENSHIFT_RUBY_PORT") \
+PORT_NUMBER = os.getenv("OPENSHIFT_HAPROXY_PORT") \
+                or os.getenv("OPENSHIFT_RUBY_PORT") \
                 or os.getenv("OPENSHIFT_PHP_PORT") \
                 or os.getenv("OPENSHIFT_NODEJS_PORT") \
                 or os.getenv("OPENSHIFT_PYTHON_PORT") \
