@@ -16,6 +16,8 @@ HOST_NAME = os.getenv("OPENSHIFT_HAPROXY_IP") \
             or os.getenv("OPENSHIFT_NODEJS_IP") \
             or os.getenv("OPENSHIFT_PYTHON_IP") \
             or os.getenv("OPENSHIFT_PERL_IP") \
+            or os.getenv("OPENSHIFT_MONO_IP") \
+            or os.getenv("OPENSHIFT_GO_IP") \
             or os.getenv("OPENSHIFT_DIY_IP")
 
 PORT_NUMBER = os.getenv("OPENSHIFT_HAPROXY_PORT") \
@@ -24,6 +26,8 @@ PORT_NUMBER = os.getenv("OPENSHIFT_HAPROXY_PORT") \
                 or os.getenv("OPENSHIFT_NODEJS_PORT") \
                 or os.getenv("OPENSHIFT_PYTHON_PORT") \
                 or os.getenv("OPENSHIFT_PERL_PORT") \
+                or os.getenv("OPENSHIFT_MONO_PORT") \
+                or os.getenv("OPENSHIFT_GO_PORT") \
                 or os.getenv("OPENSHIFT_DIY_PORT")
 
 PORT_NUMBER = int(PORT_NUMBER)
